@@ -1,3 +1,5 @@
+import Card from "@/components/card";
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between px-4 py-16 md:px-12 lg:px-24">
@@ -6,6 +8,18 @@ export default function Home() {
         <h1 className="text-4xl font-bold text-center sm:text-5xl md:text-6xl">
           Arnav Choudhary
         </h1>
+      </div>
+
+
+      <div className="grid gap-6 w-full max-w-5xl sm:grid-cols-3">
+
+        <Card
+          title="About Me"
+          description="I am a software engineer with a passion for technology and design. I have been working remotely for the last few years, focusing primarily on frontend development and design."
+          image="https://images.pexels.com/photos/30146008/pexels-photo-30146008/free-photo-of-traditional-turkish-coffee-brewing-on-hot-coals.jpeg"
+          link="/"
+        />
+
       </div>
     </main>
   );
