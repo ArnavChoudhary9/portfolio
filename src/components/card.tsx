@@ -10,8 +10,11 @@ const Card = (
 ) => {
   return (
     <a
-      className="group m-4 rounded-lg border border-transparent
-    transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 block"
+      className="group m-4 rounded-lg border border-transparent transition-colors
+      dark:bg-neutral-700/30 bg-gray-100
+      transition-transform duration-200 ease-in-out
+      hover:scale-105 hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30
+      block"
       href={link}
     >
 
