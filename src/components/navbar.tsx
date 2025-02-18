@@ -11,14 +11,17 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-dark-500 text-white p-5 fixed top-0 w-full z-[1000] shadow-md">
+    <nav className="bg-slate-900 bg-opacity-100 text-white p-5 fixed top-0 w-full z-[1000] shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-lg font-bold mx-2">
+        
+        <div className="text-2xl font-bold mx-2">
           <Link href="/" className="hover:text-gray-400">Portfolio</Link>
         </div>
-        <div className="hidden md:flex space-x-8 mx-4"> {/* Hidden on mobile */}
+        
+        <div className="hidden font-extralight md:flex space-x-8 mx-4"> {/* Hidden on mobile */}
           <Link href="/" className="hover:text-gray-400">Home</Link>
         </div>
+        
         <div className="md:hidden">
           <button onClick={toggleMenu} className="focus:outline-none">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -31,10 +34,12 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
+
       </div>
+
       {isOpen && (
-        <div className="md:hidden bg-dark-500">
-          <Link href="/" className="block px-4 py-2 hover:text-gray-400">Home</Link>
+        <div className="md:hidden">
+          <Link href="/" className="block font-extralight px-4 py-2 hover:text-gray-400">Home</Link>
         </div>
       )}
     </nav>

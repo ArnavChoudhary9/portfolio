@@ -10,17 +10,18 @@ const Card = (
 ) => {
   return (
     <a
-      className="group m-4 rounded-lg border border-transparent transition-colors
-      dark:bg-neutral-700/30 bg-gray-100
+      className="group m-4 rounded-lg border border-transparent
+      dark:bg-neutral-700/40
       transition-transform duration-200 ease-in-out
-      hover:scale-105 hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30
+      hover:scale-105 hover:border-gray-300 
+      hover:dark:border-neutral-700 hover:dark:bg-neutral-900/30
       block"
       href={link}
     >
 
       <Image
         className="rounded-t-lg"
-        width={1280}
+        width={1080}
         height={720}
         src={image}
         alt=""
@@ -34,7 +35,7 @@ const Card = (
           </span>
         </h2>
 
-        <p className="text-sm opacity-50">{description}</p>
+        <p className="text-sm opacity-70">{description}</p>
       </div>
 
     </a>
