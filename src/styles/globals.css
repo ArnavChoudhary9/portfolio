@@ -8,6 +8,13 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+:target {
+  scroll-margin-top: 20; /* Adjust based on header height */
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

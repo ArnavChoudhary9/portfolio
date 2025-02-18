@@ -13,15 +13,16 @@ const Navbar = () => {
   return (
     <nav className="bg-slate-900 bg-opacity-100 text-white p-5 fixed top-0 w-full z-[1000] shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        
+
         <div className="text-2xl font-bold mx-2">
-          <Link href="/" className="hover:text-gray-400">Portfolio</Link>
+          <Link href="#home" className="hover:text-gray-400">Portfolio</Link>
         </div>
-        
+
         <div className="hidden font-extralight md:flex space-x-8 mx-4"> {/* Hidden on mobile */}
-          <Link href="/" className="hover:text-gray-400">Home</Link>
+          <Link href="#home" className="hover:text-gray-400">Home</Link>
+          <Link href="#about" className="hover:text-gray-400">About</Link>
         </div>
-        
+
         <div className="md:hidden">
           <button onClick={toggleMenu} className="focus:outline-none">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +40,8 @@ const Navbar = () => {
 
       {isOpen && (
         <div className="md:hidden">
-          <Link href="/" className="block font-extralight px-4 py-2 hover:text-gray-400">Home</Link>
+          <Link href="#home" className="block font-extralight px-4 py-2 hover:text-gray-400">Home</Link>
+          <Link href="#about" className="block font-extralight px-4 py-2 hover:text-gray-400">About</Link>
         </div>
       )}
     </nav>
