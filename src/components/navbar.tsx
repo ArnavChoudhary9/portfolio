@@ -21,6 +21,7 @@ const Navbar = () => {
         <div className="hidden font-extralight md:flex space-x-8 mx-4"> {/* Hidden on mobile */}
           <Link href="#home" className="hover:text-gray-400">Home</Link>
           <Link href="#about" className="hover:text-gray-400">About</Link>
+          <Link href="#qualifications" className="hover:text-gray-400">Qualifications</Link>
         </div>
 
         <div className="md:hidden">
@@ -42,6 +43,7 @@ const Navbar = () => {
         <div className="md:hidden">
           <Link href="#home" className="block font-extralight px-4 py-2 hover:text-gray-400">Home</Link>
           <Link href="#about" className="block font-extralight px-4 py-2 hover:text-gray-400">About</Link>
+          <Link href="#qualifications" className="block font-extralight px-4 py-2 hover:text-gray-400">Qualifications</Link>
         </div>
       )}
     </nav>

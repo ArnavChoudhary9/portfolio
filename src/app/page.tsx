@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Card from "@/components/card";
+import About from '@/components/about';
+import Qualifications from '@/components/qualifications';
 import interpolate from 'color-interpolate';
 
 export default function Home() {
@@ -10,7 +12,7 @@ export default function Home() {
   const [backgroundColor, setBackgroundColor] = useState('rgb(30,58,138)');
 
   // Color configuration
-  const colorMap = interpolate(['rgb(30,58,138)', 'rgb(34,78,62)']);
+  const colorMap = interpolate(['rgb(30,58,138)', 'rgb(34,78,62)', 'rgb(100,10,10)']);
   const maxBlur = 8;
   const scrollThreshold = 400;
 
@@ -21,7 +23,7 @@ export default function Home() {
       // Calculate blur and text color
       const calculatedBlur = Math.min((scrollY / scrollThreshold) * maxBlur, maxBlur);
       const calculatedTextColor = Math.max((scrollThreshold / scrollY) * 255, 128);
-      const bgColorRatio = Math.min(scrollY / scrollThreshold, 1);
+      const bgColorRatio = Math.min(scrollY / (scrollThreshold * 4), 1);
 
       // Update background color
       setBackgroundColor(colorMap(bgColorRatio));
@@ -68,18 +70,9 @@ export default function Home() {
 
       <main className="relative z-[10] flex min-h-screen flex-col items-center justify-between px-4 py-16 md:px-12 lg:px-24">
 
-        <div id="about" className="flex items-center py-16 px-4 text-center h-screen">
-          <div className="max-w-2xl mx-auto">
-            <div className="relative py-8 before:absolute before:left-0 before:right-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-gray-300 before:to-transparent after:absolute after:left-0 after:right-0 after:bottom-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-gray-300 after:to-transparent">
-              <h1 className="text-4xl font-bold text-white mb-6">
-                About Me
-              </h1>
-              <p className="text-lg text-white opacity-80 leading-relaxed">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, nam dicta minima molestias laborum rerum vel. Unde minus nisi reiciendis ipsum sint est ea, omnis alias neque delectus necessitatibus quas.
-              </p>
-            </div>
-          </div>
-        </div>
+        <About />
+
+        <Qualifications />
 
         <div className="grid gap-6 w-full max-w-5xl sm:grid-cols-3">
 
