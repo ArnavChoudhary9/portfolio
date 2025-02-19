@@ -43,7 +43,8 @@ export default function Home() {
         id='home'
         style={{
           filter: `blur(${blurIntensity}px)`,
-          WebkitBackdropFilter: `blur(${blurIntensity}px)`
+          WebkitBackdropFilter: `blur(${blurIntensity}px)`,
+          pointerEvents: 'none'
         }}
       >
         <div
