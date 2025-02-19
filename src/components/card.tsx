@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Card = (
   { title, description, link, image }: {
@@ -9,7 +10,7 @@ const Card = (
   }
 ) => {
   return (
-    <a
+    <Link
       className="group m-4 rounded-lg border border-transparent
       dark:bg-neutral-700/40
       transition-transform duration-200 ease-in-out
@@ -38,7 +39,7 @@ const Card = (
         <p className="text-sm opacity-70">{description}</p>
       </div>
 
-    </a>
+    </Link>
   );
 }
 
