@@ -1,46 +1,4 @@
-'use client'
-import { useState, useEffect } from 'react';
-
-interface CodeforcesResponse {
-  result: [{
-    rating: number;
-    rank: string;
-    maxRating: number;
-  }];
-}
-
 const Qualifications = () => {
-  const [data, setData] = useState<CodeforcesResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    fetch('https://codeforces.com/api/user.info?handles=arnavchoudhary.6969', {
-      signal: controller.signal
-    })
-      .then(async (res) => {
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        return res.json();
-      })
-      .then((data: CodeforcesResponse) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err.name !== 'AbortError') {
-          setError(err.message);
-          setLoading(false);
-        }
-      });
-
-    return () => controller.abort();
-  }, []);
-
-  if (loading) return <div>Loading Codeforces data...</div>;
-  if (error) return <div>Error Loading Codeforces data</div>;
-
   return (
     <div id="qualifications" className="flex items-center py-16 px-4 text-center h-screen">
       <div className="max-w-3xl mx-auto">
@@ -67,10 +25,6 @@ const Qualifications = () => {
               <li>
                 <h3 className='opacity-80'>Graduation</h3>
                 <p className='opacity-60'>Passed: 2024-Present | Grade: 7.067 (CGPA as of Feb-2025)</p>
-              </li>
-              <li>
-                <h3 className='opacity-80'>CodeForces</h3>
-                <p className='opacity-60'>Rating: {data?.result[0].rating} | Rank: {data?.result[0].rank} | All-Time High: {data?.result[0].maxRating}</p>
               </li>
             </ul>
           </div>

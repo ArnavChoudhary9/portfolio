@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Card from "@/components/card";
 import About from '@/components/about';
 import Qualifications from '@/components/qualifications';
+import Skills from '@/components/skills';
 import interpolate from 'color-interpolate';
 
 export default function Home() {
@@ -12,7 +13,7 @@ export default function Home() {
   const [backgroundColor, setBackgroundColor] = useState('rgb(30,58,138)');
 
   // Color configuration
-  const colorMap = interpolate(['rgb(30,58,138)', 'rgb(34,78,62)', 'rgb(100,10,10)']);
+  const colorMap = interpolate(['rgb(30,58,138)', 'rgb(34,78,62)', 'rgb(48,59,6)', 'rgb(96,10,62)']);
   const maxBlur = 8;
   const scrollThreshold = 400;
 
@@ -23,7 +24,7 @@ export default function Home() {
       // Calculate blur and text color
       const calculatedBlur = Math.min((scrollY / scrollThreshold) * maxBlur, maxBlur);
       const calculatedTextColor = Math.max((scrollThreshold / scrollY) * 255, 128);
-      const bgColorRatio = Math.min(scrollY / (scrollThreshold * 4), 1);
+      const bgColorRatio = Math.min(scrollY / (scrollThreshold * 9), 1);
 
       // Update background color
       setBackgroundColor(colorMap(bgColorRatio));
@@ -73,6 +74,8 @@ export default function Home() {
         <About />
 
         <Qualifications />
+
+        <Skills />
 
         <div className="grid gap-6 w-full max-w-5xl sm:grid-cols-3">
 
