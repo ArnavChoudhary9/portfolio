@@ -39,6 +39,7 @@ const Qualifications = () => {
   }, []);
 
   if (loading) return <div>Loading Codeforces data...</div>;
+  if (error) return <div>Error Loading Codeforces data</div>;
 
   return (
     <div id="qualifications" className="flex items-center py-16 px-4 text-center h-screen">

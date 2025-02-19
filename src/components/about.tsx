@@ -9,7 +9,7 @@ const About = () => {
           </h1>
           
           <p className="text-lg text-white opacity-80 leading-relaxed">
-            I'm Arnav Choudhary, an Applied Mechanics freshman at IIT Delhi. My current focus lies in developing Game engine with Ray-Tracing capabilities.
+            I&apos;m Arnav Choudhary, an Applied Mechanics freshman at IIT Delhi. My current focus lies in developing Game engine with Ray-Tracing capabilities.
           </p>
 
           <div className='text-left mt-4'>
@@ -24,11 +24,11 @@ const About = () => {
               </li>
               <li>
                 <h3 className='opacity-80'>Game Engine Dev</h3>
-                <p className='opacity-60'>I've created multiple Game engines with very complex architectures and detailed documentations</p>
+                <p className='opacity-60'>I&apos;ve created multiple Game engines with very complex architectures and detailed documentations</p>
               </li>
               <li>
                 <h3 className='opacity-80'>Full Stack Web Dev</h3>
-                <p className='opacity-60'>I've created multiple websites just like this one, using multiple frameworks including Next.js, React, Flask and Django</p>
+                <p className='opacity-60'>I&apos;ve created multiple websites just like this one, using multiple frameworks including Next.js, React, Flask and Django</p>
               </li>
             </ul>
           </div>
