@@ -49,8 +49,8 @@ export default function Home() {
         <div
           className={`absolute inset-0 z-[-10] rounded-full bg-gradient-radial from-white blur-3xl`}
           style={{
-            '--tw-gradient-from': backgroundColor,
-            '--tw-gradient-to': 'transparent'
+            ['--tw-gradient-from' as any]: backgroundColor,
+            ['--tw-gradient-to' as any]: 'transparent'
           }}
         />
         <h1
