@@ -1,20 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence, useScroll } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MdMenu, MdClose } from 'react-icons/md';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { scrollY } = useScroll();
-
-  // Sync scroll tracking with other components
-  useEffect(() => {
-    return scrollY.on('change', (latest) => {
-      // Add your scroll-linked animation logic here
-    });
-  }, [scrollY]);
 
   const menuVariants = {
     open: {
