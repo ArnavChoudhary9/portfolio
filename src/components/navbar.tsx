@@ -23,6 +23,7 @@ const Navbar = () => {
           <Link href="#about" className="hover:text-gray-400">About</Link>
           <Link href="#qualifications" className="hover:text-gray-400">Qualifications</Link>
           <Link href="#skills" className="hover:text-gray-400">Skills</Link>
+          <Link href="#projects" className="hover:text-gray-400">Projects</Link>
         </div>
 
         <div className="md:hidden">
@@ -46,6 +47,7 @@ const Navbar = () => {
           <Link href="#about" className="block font-extralight px-4 py-2 hover:text-gray-400">About</Link>
           <Link href="#qualifications" className="block font-extralight px-4 py-2 hover:text-gray-400">Qualifications</Link>
           <Link href="#skills" className="block font-extralight px-4 py-2 hover:text-gray-400">Skills</Link>
+          <Link href="#projects" className="block font-extralight px-4 py-2 hover:text-gray-400">Projects</Link>
         </div>
       )}
     </nav>
