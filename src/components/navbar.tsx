@@ -1,33 +1,40 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { MdMenu, MdClose } from 'react-icons/md';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { scrollY } = useScroll();
+
+  // Sync scroll tracking with other components
+  useEffect(() => {
+    return scrollY.on('change', (latest) => {
+      // Add your scroll-linked animation logic here
+    });
+  }, [scrollY]);
 
   const menuVariants = {
     open: {
       height: "auto",
-      opacity: 1,
       transition: {
-        type: "tween",
-        ease: "easeInOut",
-        duration: 0.3,
-        when: "beforeChildren",
-        staggerChildren: 0.1
+        type: "spring",
+        damping: 20,
+        stiffness: 200,
+        // Isolate animation from scroll layout
+        onUpdate: () => window.dispatchEvent(new Event('resize'))
       }
     },
     closed: {
       height: 0,
-      opacity: 0,
       transition: {
-        type: "tween",
-        ease: "easeInOut",
-        duration: 0.2,
-        when: "afterChildren"
+        type: "spring",
+        damping: 30,
+        stiffness: 200,
+        // Prevent layout shift during animation
+        onUpdate: () => window.dispatchEvent(new Event('resize'))
       }
     }
   };
