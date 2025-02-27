@@ -2,12 +2,56 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MdMenu, MdClose } from 'react-icons/md';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  const menuVariants = {
+    open: {
+      height: "auto",
+      opacity: 1,
+      transition: {
+        type: "tween",
+        ease: "easeInOut",
+        duration: 0.3,
+        when: "beforeChildren",
+        staggerChildren: 0.1
+      }
+    },
+    closed: {
+      height: 0,
+      opacity: 0,
+      transition: {
+        type: "tween",
+        ease: "easeInOut",
+        duration: 0.2,
+        when: "afterChildren"
+      }
+    }
+  };
+
+  const itemVariants = {
+    open: { 
+      opacity: 1,
+      x: 0 
+    },
+    closed: { 
+      opacity: 0,
+      x: -20 
+    }
+  };
+   
+  const iconVariants = {
+    open: {
+      rotate: 90,
+      scale: 1.1
+    },
+    closed: {
+      rotate: 0,
+      scale: 1
+    }
   };
 
   return (
@@ -27,29 +71,75 @@ const Navbar = () => {
         </div>
 
         <div className="md:hidden">
-          <button onClick={toggleMenu} className="focus:outline-none">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
-              />
-            </svg>
-          </button>
+          <motion.button
+            whileHover="hover"
+            variants={iconVariants}
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-2xl p-2 hover:text-gray-400"
+          >
+            <AnimatePresence mode='wait' initial={false}>
+              {isOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <MdClose />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <MdMenu />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
-
       </div>
 
-      {isOpen && (
-        <div className="md:hidden">
-          <Link href="#home" className="block font-extralight px-4 py-2 hover:text-gray-400">Home</Link>
-          <Link href="#about" className="block font-extralight px-4 py-2 hover:text-gray-400">About</Link>
-          <Link href="#qualifications" className="block font-extralight px-4 py-2 hover:text-gray-400">Qualifications</Link>
-          <Link href="#skills" className="block font-extralight px-4 py-2 hover:text-gray-400">Skills</Link>
-          <Link href="#projects" className="block font-extralight px-4 py-2 hover:text-gray-400">Projects</Link>
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={menuVariants}
+            className="md:hidden overflow-hidden"
+          >
+            <motion.div
+              className="px-4 pt-2 pb-4 space-y-2"
+              variants={{
+                open: { transition: { staggerChildren: 0.1 } },
+                closed: { transition: { staggerChildren: 0.05, staggerDirection: -1 } }
+              }}
+            >
+              <motion.div variants={itemVariants}>
+                <Link href="#home" className="block font-extralight py-2 hover:text-gray-400">Home</Link>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link href="#about" className="block font-extralight py-2 hover:text-gray-400">About</Link>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link href="#qualifications" className="block font-extralight py-2 hover:text-gray-400">Qualifications</Link>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link href="#skills" className="block font-extralight py-2 hover:text-gray-400">Skills</Link>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link href="#projects" className="block font-extralight py-2 hover:text-gray-400">Projects</Link>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </nav>
   );
 };
