@@ -8,7 +8,7 @@
             "TypeScript",
             "API"
         ],
-        "imageUrl": "/images/weather-app.png",
+        "imageUrl": "https://picsum.photos/300/200",
         "githubUrl": "https://github.com/yourusername/weather-app"
     },
     {
@@ -20,7 +20,7 @@
             "C++",
             "IoT"
         ],
-        "imageUrl": "/images/smart-light.png",
+        "imageUrl": "https://picsum.photos/300/200",
         "githubUrl": "https://github.com/yourusername/smart-light"
     }
 ]
