@@ -14,9 +14,9 @@ const ProjectPage = (
   }
 
   return (
-    <main className="relative z-[10] flex min-h-screen flex-col items-center justify-between px-4 py-16">
+    <div className="relative z-[10] flex items-center justify-between px-4 py-16">
       <ProjectDetails project={project} />
-    </main>
+    </div>
   );
 };
 

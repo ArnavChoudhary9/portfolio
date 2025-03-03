@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from "next/link";
 import interpolate from 'color-interpolate';
 
@@ -8,13 +9,26 @@ const Background = () => {
   const [blurIntensity, setBlurIntensity] = useState(0);
   const [textColor, setTextColor] = useState(255);
   const [backgroundColor, setBackgroundColor] = useState('rgb(30,58,138)');
+  const [isIndex, setIsIndex] = useState(true);
 
   // Color configuration
   const colorMap = interpolate(['rgb(30,58,138)', 'rgb(34,78,62)', 'rgb(48,59,6)', 'rgb(96,10,62)']);
   const maxBlur = 8;
   const scrollThreshold = 400;
 
+  const pathname = usePathname();
+
   useEffect(() => {
+    const isHomePage = pathname === '/';
+    setIsIndex(isHomePage);
+
+    if (!isHomePage) {
+      setBackgroundColor('rgb(30,58,138)');
+      setTextColor(128);
+      setBlurIntensity(8);
+      return;
+    }
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
 
@@ -31,7 +45,7 @@ const Background = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [pathname]);
 
   return (
     <div id="home" className='flex items-center justify-center'>
@@ -63,31 +77,33 @@ const Background = () => {
         </h1>
       </div>
 
-      <div className='absolute bottom-4 z-20 transition-all'>
+      {isIndex &&
+        <div className='absolute bottom-4 z-20 transition-all'>
 
-        <Link
-          type="button"
-          className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-900 hover:bg-gray-800 hover:scale-125 duration-300 text-white"
-          href="#about"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor">
+          <Link
+            type="button"
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-900 hover:bg-gray-800 hover:scale-125 duration-300 text-white"
+            href="#about"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor">
 
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M19 9l-7 7-7-7"
-            />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
 
-          </svg>
-        </Link>
+            </svg>
+          </Link>
 
-      </div>
+        </div>
+      }
     </div>
   );
 }

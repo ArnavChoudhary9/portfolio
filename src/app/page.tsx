@@ -7,14 +7,14 @@ export default function Home() {
   return (
     <>
       <div className="h-screen" />
-      <main className="relative z-[10] flex min-h-screen flex-col items-center justify-between px-4 py-16 md:px-12 lg:px-24">
+      <div className="relative z-[10] flex min-h-screen flex-col items-center justify-between px-4 py-16 md:px-12 lg:px-24">
 
         <About />
         <Qualifications />
         <Skills />
         <ProjectCards />
 
-      </main >
+      </div>
     </>
   );
 }
