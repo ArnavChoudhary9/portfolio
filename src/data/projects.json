@@ -1,0 +1,26 @@
+[
+    {
+        "name": "weather-app",
+        "title": "Weather App",
+        "description": "A React-based weather forecasting application",
+        "technologies": [
+            "React",
+            "TypeScript",
+            "API"
+        ],
+        "imageUrl": "/images/weather-app.png",
+        "githubUrl": "https://github.com/yourusername/weather-app"
+    },
+    {
+        "name": "smart-light",
+        "title": "Smart Light Controller",
+        "description": "An IoT-based light controller using Arduino",
+        "technologies": [
+            "Arduino",
+            "C++",
+            "IoT"
+        ],
+        "imageUrl": "/images/smart-light.png",
+        "githubUrl": "https://github.com/yourusername/smart-light"
+    }
+]
