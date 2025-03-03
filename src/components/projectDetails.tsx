@@ -25,7 +25,7 @@ const ProjectDetails = ({ project }: ProjectDetailsProps) => {
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
       </div>
 
-      <div className="flex flex-col mx-8 p-6">
+      <div className="flex flex-col mx-2 p-6">
         <div className="flex flex-row mb-4">
           <h1 className="text-4xl font-bold">{project.title}</h1>
           <Link
