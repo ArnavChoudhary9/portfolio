@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { FaGithub } from 'react-icons/fa';
 
 interface ProjectDetailsProps {
   project: {
@@ -24,7 +26,18 @@ const ProjectDetails = ({ project }: ProjectDetailsProps) => {
       </div>
 
       <div className="flex flex-col mx-8 p-6">
-        <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
+        <div className="flex flex-row mb-4">
+          <h1 className="text-4xl font-bold">{project.title}</h1>
+          <Link
+            href={project.githubUrl}
+            className="px-5 mt-2 hover:text-blue-400 transition-colors duration-300"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+          >
+            <FaGithub className="h-6 w-6 hover:scale-125 transition-transform" />
+          </Link>
+        </div>
         <div className="mb-4">
           <h2 className="text-xl font-semibold mb-2">Technologies Used:</h2>
           <ul className="flex flex-wrap gap-2 transition-transform">

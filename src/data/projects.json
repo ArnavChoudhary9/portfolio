@@ -1,26 +1,13 @@
 [
     {
-        "name": "weather-app",
-        "title": "Weather App",
-        "description": "A React-based weather forecasting application",
+        "name": "pi",
+        "title": "Pi",
+        "description": "A Game engine written in Python. It has features like Projects creation and management, drag and drop, dockable editor, 3D-Rendring and more",
         "technologies": [
-            "React",
-            "TypeScript",
-            "API"
+            "Python",
+            "OpenGL"
         ],
-        "imageUrl": "https://picsum.photos/300/200",
-        "githubUrl": "https://github.com/yourusername/weather-app"
-    },
-    {
-        "name": "smart-light",
-        "title": "Smart Light Controller",
-        "description": "An IoT-based light controller using Arduino",
-        "technologies": [
-            "Arduino",
-            "C++",
-            "IoT"
-        ],
-        "imageUrl": "https://picsum.photos/300/200",
-        "githubUrl": "https://github.com/yourusername/smart-light"
+        "imageUrl": "/images/projects/pi.png",
+        "githubUrl": "https://github.com/ArnavChoudhary9/pi"
     }
 ]

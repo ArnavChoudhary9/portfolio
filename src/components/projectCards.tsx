@@ -10,7 +10,7 @@ const ProjectCards = () => {
           key={project.name}
           title={project.title}
           description={project.description}
-          image="https://picsum.photos/300/200"
+          image={project.imageUrl}
           link={`/projects/${project.name}`}
         />
       ))}
