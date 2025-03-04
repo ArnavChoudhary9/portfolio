@@ -66,7 +66,7 @@ const Skills = () => {
               </li>
               <li>
                 <h3 className='opacity-80'>Programming Languages</h3>
-                <p className='opacity-60'>Python | C/C++ | JavaScript/TypeScript | Rust | Assambly</p>
+                <p className='opacity-60'>Python | C/C++ | JavaScript/TypeScript | Rust | Assembly</p>
               </li>
             </ul>
           </div>
