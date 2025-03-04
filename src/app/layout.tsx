@@ -24,11 +24,11 @@ export default function RootLayout({
         <Background />
 
         <div className="flex flex-col min-h-screen">
-        
+
           <main className="flex-grow">
             {children}
           </main>
-        
+
           <Footer />
         </div>
 

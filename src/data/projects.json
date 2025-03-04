@@ -2,12 +2,85 @@
     {
         "name": "pi",
         "title": "Pi",
-        "description": "A Game engine written in Python. It has features like Projects creation and management, drag and drop, dockable editor, 3D-Rendring and more",
+        "description": "This advanced game engine, developed in Python, features an intuitive project management system and a user-friendly drag-and-drop interface. Its customizable, dockable editor enhances workflow efficiency, while robust 3D rendering capabilities allow for the creation of stunning game environments. Ideal for both indie developers and professional studios, this engine harnesses Python's versatility to streamline game development and foster creativity.",
         "technologies": [
             "Python",
-            "OpenGL"
+            "OpenGL",
+            "ImGUI"
         ],
         "imageUrl": "/images/projects/pi.png",
         "githubUrl": "https://github.com/ArnavChoudhary9/pi"
+    },
+    {
+        "name": "photon",
+        "title": "Photon",
+        "description": "This advanced game engine, developed in Python, offers a comprehensive suite of features for efficient game development. It boasts an intuitive project management system, user-friendly drag-and-drop interface, and a customizable, dockable editor for enhanced workflow. The engine's robust 3D rendering capabilities enable the creation of visually stunning game environments. With improved performance, maintainability, and a refined architecture, this engine provides developers with powerful tools for crafting immersive gaming experiences. Its fully documented codebase and optimized implementation make it an ideal choice for both indie developers and professional studios seeking to streamline their game development process.",
+        "technologies": [
+            "Python",
+            "OpenGL",
+            "mdbook",
+            "ImGUI"
+        ],
+        "imageUrl": "/images/projects/photon.png",
+        "githubUrl": "https://github.com/ArnavChoudhary9/Photon"
+    },
+    {
+        "name": "girnar-website",
+        "title": "Website for Girnar",
+        "description": "This comprehensive website for an IITD hostel incorporates secure OAuth authentication and an intuitive admin dashboard for efficient announcement management. The platform also features a dynamic marketplace, fostering a vibrant community ecosystem. By combining robust security measures with user-friendly interfaces, the website enhances communication and resource sharing among hostel residents.",
+        "technologies": [
+            "Next.js",
+            "OAuth",
+            "Tailwind"
+        ],
+        "imageUrl": "/images/projects/girnar-website.png",
+        "githubUrl": "https://dahaadgirnar.vercel.app/"
+    },
+    {
+        "name": "kahnav-properties",
+        "title": "Website for Kahnav Properties",
+        "description": "Kahnav Properties' sophisticated website streamlines property transactions with advanced features. It allows users to effortlessly list properties, securely storing details in an SQL database. The platform also offers a tailored property search function, enabling clients to explore available listings in their desired regions. This user-friendly interface optimizes the property buying and selling experience, enhancing Kahnav Properties' market presence and client satisfaction.",
+        "technologies": [
+            "Next.js",
+            "SQL",
+            "Tailwind"
+        ],
+        "imageUrl": "/images/projects/kahnav-properties.png",
+        "githubUrl": "https://github.com/ArnavChoudhary9/kahnav-properties"
+    },
+    {
+        "name": "rust-raytracer",
+        "title": "RayTracer in Rust",
+        "description": "This high-performance raytracer, implemented in Rust, offers an intuitive scene description interface through well-designed classes. It boasts a comprehensive suite of advanced raytracing features, including soft shadows, Bounding Volume Hierarchy (BVH) for efficient rendering, and realistic motion blur effects. Leveraging Rust's speed and safety, this raytracer delivers stunning, photorealistic images with remarkable efficiency.",
+        "technologies": [
+            "Rust",
+            "RayTracing"
+        ],
+        "imageUrl": "/images/projects/rust-raytracer.jpg",
+        "githubUrl": "https://github.com/ArnavChoudhary9/RayTracing"
+    },
+    {
+        "name": "cpp-physics-engine",
+        "title": "Physics Engine in C++",
+        "description": "This high-performance physics engine, crafted in C++, delivers exceptional simulation capabilities. It provides a comprehensive set of classes, including RigidBodies and various Colliders, enabling developers to construct and simulate complex physical environments with ease. The engine's intuitive world-building interface, combined with its optimized C++ core, ensures rapid and accurate physics simulations for demanding applications.",
+        "technologies": [
+            "C++",
+            "Physics Engine",
+            "Simulation"
+        ],
+        "imageUrl": "/images/projects/physics-engine.jpeg",
+        "githubUrl": "https://github.com/ArnavChoudhary9/PhysicsEngine"
+    },
+    {
+        "name": "pyrender",
+        "title": "PyRender",
+        "description": "This rendering engine, developed in Python, extended with C++, offers a straightforward solution for generating animated videos of specified scenes. While it is basic and primitive in its capabilities, it effectively outputs visual representations of animations, making it a useful tool for simple rendering tasks and introductory projects.",
+        "technologies": [
+            "Python",
+            "C++",
+            "ffmpeg"
+        ],
+        "imageUrl": "/images/projects/pyrender.jpeg",
+        "githubUrl": "https://github.com/ArnavChoudhary9/PyRender"
     }
 ]

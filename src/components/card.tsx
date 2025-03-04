@@ -15,9 +15,9 @@ const Card = (
   return (
     <Link
       className="m-4 rounded-lg border border-transparent bg-neutral-700/40
-      transition-transform duration-200 ease-in-out
-      hover:scale-105 hover:border-gray-300 
-      block"
+        transition-transform duration-200 ease-in-out
+        hover:scale-105 hover:border-gray-300 
+        block"
       href={link}
     >
 

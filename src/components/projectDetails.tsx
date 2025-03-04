@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa'
 
 interface ProjectDetailsProps {
   project: {
@@ -46,10 +46,7 @@ const ProjectDetails = ({ project }: ProjectDetailsProps) => {
             ))}
           </ul>
         </div>
-        <p className="text-lg mb-4">{project.description}</p>
-        {/* <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
-          View on GitHub
-        </a> */}
+        <p className="text-lg font-light mb-4">{project.description}</p>
       </div>
     </div>
   );
