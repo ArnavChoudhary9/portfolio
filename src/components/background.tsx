@@ -45,7 +45,7 @@ const Background = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname]);
+  }, [pathname, colorMap]);
 
   return (
     <div id="home" className='flex items-center justify-center'>
