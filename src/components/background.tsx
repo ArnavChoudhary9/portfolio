@@ -1,15 +1,23 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from "next/link";
 import interpolate from 'color-interpolate';
+
+// Three.js
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import * as THREE from 'three';
+import MouseLight from '@/components/mouseLight';
 
 const Background = () => {
   const [blurIntensity, setBlurIntensity] = useState(0);
   const [textColor, setTextColor] = useState(255);
   const [backgroundColor, setBackgroundColor] = useState('rgb(30,58,138)');
   const [isIndex, setIsIndex] = useState(true);
+
+  const planeRef = useRef<THREE.Mesh>(null);
 
   // Color configuration
   const colorMap = interpolate(['rgb(30,58,138)', 'rgb(34,78,62)', 'rgb(48,59,6)', 'rgb(96,10,62)']);
@@ -49,24 +57,35 @@ const Background = () => {
 
   return (
     <div id="home" className='flex items-center justify-center'>
+      <div className='fixed top-0 left-0 w-full h-full'>
+        <Canvas>
+          <ambientLight intensity={0.25} />
+          <MouseLight />
+          <mesh ref={planeRef}>
+            <planeGeometry args={[100, 100]} />
+            <meshStandardMaterial color="gray" roughness={0.4} metalness={0.1} />
+          </mesh>
+        </Canvas>
+      </div>
+
       <div
         className="
           fixed top-0 left-0 flex items-center justify-center w-full h-screen
           transition-all duration-0
-        "
+          "
         style={{
           filter: `blur(${blurIntensity}px)`,
           WebkitBackdropFilter: `blur(${blurIntensity}px)`,
           pointerEvents: 'none'
         }}
       >
-        <div
+        {/* <div
           className='absolute inset-0 z-[-10] rounded-full bg-gradient-radial from-white blur-3xl'
           style={{
             '--tw-gradient-from': backgroundColor,
             '--tw-gradient-to': 'transparent'
           }}
-        />
+        /> */}
         <h1
           className="text-4xl font-bold text-center sm:text-5xl md:text-6xl"
           style={{
