@@ -1,30 +1,22 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const MouseLight = (() => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const mousePosition = useRef({ x: 0, y: 0 });
   const lightRef = useRef<THREE.PointLight>(null);
   const { camera } = useThree();
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-
     const handleMouseMove = (event: MouseEvent) => {
-      const x = (event.clientX / window.innerWidth) * 2 - 1;
-      const y = -(event.clientY / window.innerHeight) * 2 + 1;
-      setMousePosition({ x, y });
+      mousePosition.current.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mousePosition.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
     };
 
     const handleTouchMove = (event: TouchEvent) => {
       const touch = event.touches[0];
-      const x = (touch.clientX / window.innerWidth) * 2 - 1;
-      const y = -(touch.clientY / window.innerHeight) * 2 + 1;
-
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        setMousePosition({ x, y });
-      }, 10); // Update every 10ms
+      mousePosition.current.x = (touch.clientX / window.innerWidth) * 2 - 1;
+      mousePosition.current.y = -(touch.clientY / window.innerHeight) * 2 + 1;
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -38,14 +30,14 @@ const MouseLight = (() => {
 
   useFrame(() => {
     if (lightRef.current) {
-      const vector = new THREE.Vector3(mousePosition.x, mousePosition.y, 0.5);
+      const vector = new THREE.Vector3(mousePosition.current.x, mousePosition.current.y, 0.5);
       vector.unproject(camera);
 
       const dir = vector.sub(camera.position).normalize();
       const distance = 5;
       const pos = camera.position.clone().add(dir.multiplyScalar(distance));
 
-      lightRef.current.position.copy(pos);
+      lightRef.current.position.lerp(pos, 0.1);
     }
   });
 
