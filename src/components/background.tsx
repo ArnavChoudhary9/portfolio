@@ -15,6 +15,7 @@ const Background = () => {
   const [textColor, setTextColor] = useState(255);
   // const [backgroundColor, setBackgroundColor] = useState('rgb(30,58,138)');
   const [isIndex, setIsIndex] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   const planeRef = useRef<THREE.Mesh>(null);
 
@@ -28,6 +29,8 @@ const Background = () => {
   useEffect(() => {
     const isHomePage = pathname === '/';
     setIsIndex(isHomePage);
+
+    setIsMobile(window.innerWidth <= 768);
 
     if (!isHomePage) {
       // setBackgroundColor('rgb(30,58,138)');
@@ -53,8 +56,6 @@ const Background = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [pathname, colorMap]);
-
-  const isMobile = window.innerWidth <= 768;
 
   return (
     <div id="home" className='flex items-center justify-center'>

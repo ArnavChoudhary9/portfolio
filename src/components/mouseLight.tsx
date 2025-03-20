@@ -13,22 +13,23 @@ const MouseLight = (() => {
     const handleMouseMove = (event: MouseEvent) => {
       const x = (event.clientX / window.innerWidth) * 2 - 1;
       const y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        setMousePosition({ x, y });
-      }, 8); // Update every 50ms
+      setMousePosition({ x, y });
     };
-  
+
     const handleTouchMove = (event: TouchEvent) => {
       const touch = event.touches[0];
       const x = (touch.clientX / window.innerWidth) * 2 - 1;
       const y = -(touch.clientY / window.innerHeight) * 2 + 1;
+
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setMousePosition({ x, y });
+      }, 10); // Update every 10ms
     };
-  
+
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
-  
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
