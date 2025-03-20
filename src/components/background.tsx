@@ -7,14 +7,13 @@ import interpolate from 'color-interpolate';
 
 // Three.js
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import MouseLight from '@/components/mouseLight';
 
 const Background = () => {
   const [blurIntensity, setBlurIntensity] = useState(0);
   const [textColor, setTextColor] = useState(255);
-  const [backgroundColor, setBackgroundColor] = useState('rgb(30,58,138)');
+  // const [backgroundColor, setBackgroundColor] = useState('rgb(30,58,138)');
   const [isIndex, setIsIndex] = useState(true);
 
   const planeRef = useRef<THREE.Mesh>(null);
@@ -31,7 +30,7 @@ const Background = () => {
     setIsIndex(isHomePage);
 
     if (!isHomePage) {
-      setBackgroundColor('rgb(30,58,138)');
+      // setBackgroundColor('rgb(30,58,138)');
       setTextColor(128);
       setBlurIntensity(8);
       return;
@@ -43,10 +42,10 @@ const Background = () => {
       // Calculate blur and text color
       const calculatedBlur = Math.min((scrollY / scrollThreshold) * maxBlur, maxBlur);
       const calculatedTextColor = Math.max((scrollThreshold / scrollY) * 255, 128);
-      const bgColorRatio = Math.min(scrollY / (scrollThreshold * 9), 1);
+      // const bgColorRatio = Math.min(scrollY / (scrollThreshold * 9), 1);
 
       // Update background color
-      setBackgroundColor(colorMap(bgColorRatio));
+      // setBackgroundColor(colorMap(bgColorRatio));
       setTextColor(calculatedTextColor);
       setBlurIntensity(calculatedBlur);
     };

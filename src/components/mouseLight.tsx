@@ -6,7 +6,7 @@ const MouseLight = () => {
   const lightRef = useRef<THREE.PointLight>(null);
   const { camera, mouse } = useThree();
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     if (lightRef.current) {
       // mouse -> 3D space
       const vector = new THREE.Vector3(mouse.x, mouse.y, 0.5);
