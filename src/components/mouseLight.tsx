@@ -32,7 +32,7 @@ const MouseLight = (({ isMobile } : {
       else
         window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, []);
+  }, [isMobile]);
 
   useFrame(() => {
     if (lightRef.current) {
