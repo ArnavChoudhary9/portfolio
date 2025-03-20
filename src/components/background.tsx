@@ -62,7 +62,7 @@ const Background = () => {
       <div className='fixed top-0 left-0 w-full h-full pointer-events-none'>
         <Canvas  dpr={isMobile ? [1, 1.5] : [1, 2]}>
           <ambientLight intensity={0.25} />
-          <MouseLight />
+          <MouseLight isMobile={isMobile} />
           <mesh ref={planeRef}>
             <planeGeometry args={[100, 100]} />
             <meshStandardMaterial color="gray" roughness={0.4} metalness={0.1} />
