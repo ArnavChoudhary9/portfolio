@@ -54,10 +54,12 @@ const Background = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [pathname, colorMap]);
 
+  const isMobile = window.innerWidth <= 768;
+
   return (
     <div id="home" className='flex items-center justify-center'>
       <div className='fixed top-0 left-0 w-full h-full pointer-events-none'>
-        <Canvas>
+        <Canvas  dpr={isMobile ? [1, 1.5] : [1, 2]}>
           <ambientLight intensity={0.25} />
           <MouseLight />
           <mesh ref={planeRef}>

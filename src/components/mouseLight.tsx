@@ -24,11 +24,6 @@ const MouseLight = (() => {
       const touch = event.touches[0];
       const x = (touch.clientX / window.innerWidth) * 2 - 1;
       const y = -(touch.clientY / window.innerHeight) * 2 + 1;
-
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        setMousePosition({ x, y });
-      }, 8); // Update every 50ms
     };
   
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
