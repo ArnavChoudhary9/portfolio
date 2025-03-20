@@ -13,11 +13,20 @@ const MouseLight = (() => {
       const y = -(event.clientY / window.innerHeight) * 2 + 1;
       setMousePosition({ x, y });
     };
-
+  
+    const handleTouchMove = (event: TouchEvent) => {
+      const touch = event.touches[0];
+      const x = (touch.clientX / window.innerWidth) * 2 - 1;
+      const y = -(touch.clientY / window.innerHeight) * 2 + 1;
+      setMousePosition({ x, y });
+    };
+  
     window.addEventListener('mousemove', handleMouseMove);
-
+    window.addEventListener('touchmove', handleTouchMove);
+  
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
   }, []);
 
