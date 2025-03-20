@@ -54,19 +54,19 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-neutral-900 backdrop-blur-sm bg-opacity-0 text-white p-5 fixed top-0 w-full z-[1000] h-20 shadow-md">
+    <nav className="bg-neutral-900 backdrop-blur-sm bg-opacity-0 text-white p-5 fixed top-0 w-full z-[1000] h-20 block shadow-md">
       <div className="container mx-auto flex justify-between items-center">
 
         <div className="text-2xl font-bold mx-2">
-          <Link href="\#home" className="hover:text-gray-400">Portfolio</Link>
+          <Link href="/#home" className="hover:text-gray-400">Portfolio</Link>
         </div>
 
         <div className="hidden font-extralight md:flex space-x-8 mx-4"> {/* Hidden on mobile */}
-          <Link href="\#home" className="hover:text-gray-400">Home</Link>
-          <Link href="\#about" className="hover:text-gray-400">About</Link>
-          <Link href="\#qualifications" className="hover:text-gray-400">Qualifications</Link>
-          <Link href="\#skills" className="hover:text-gray-400">Skills</Link>
-          <Link href="\#projects" className="hover:text-gray-400">Projects</Link>
+          <Link href="/#home" className="hover:text-gray-400">Home</Link>
+          <Link href="/#about" className="hover:text-gray-400">About</Link>
+          <Link href="/#qualifications" className="hover:text-gray-400">Qualifications</Link>
+          <Link href="/#skills" className="hover:text-gray-400">Skills</Link>
+          <Link href="/#projects" className="hover:text-gray-400">Projects</Link>
         </div>
 
         <div className="md:hidden">
@@ -120,19 +120,19 @@ const Navbar = () => {
               }}
             >
               <motion.div variants={itemVariants}>
-                <Link href="\#home" onClick={() => setIsOpen(!isOpen)} className="block font-extralight py-2 hover:text-gray-400">Home</Link>
+                <Link href="/#home" onClick={() => setIsOpen(!isOpen)} className="block font-extralight py-2 hover:text-gray-400">Home</Link>
               </motion.div>
               <motion.div variants={itemVariants}>
-                <Link href="\#about" onClick={() => setIsOpen(!isOpen)} className="block font-extralight py-2 hover:text-gray-400">About</Link>
+                <Link href="/#about" onClick={() => setIsOpen(!isOpen)} className="block font-extralight py-2 hover:text-gray-400">About</Link>
               </motion.div>
               <motion.div variants={itemVariants}>
-                <Link href="\#qualifications" onClick={() => setIsOpen(!isOpen)} className="block font-extralight py-2 hover:text-gray-400">Qualifications</Link>
+                <Link href="/#qualifications" onClick={() => setIsOpen(!isOpen)} className="block font-extralight py-2 hover:text-gray-400">Qualifications</Link>
               </motion.div>
               <motion.div variants={itemVariants}>
-                <Link href="\#skills" onClick={() => setIsOpen(!isOpen)} className="block font-extralight py-2 hover:text-gray-400">Skills</Link>
+                <Link href="/#skills" onClick={() => setIsOpen(!isOpen)} className="block font-extralight py-2 hover:text-gray-400">Skills</Link>
               </motion.div>
               <motion.div variants={itemVariants}>
-                <Link href="\#projects" onClick={() => setIsOpen(!isOpen)} className="block font-extralight py-2 hover:text-gray-400">Projects</Link>
+                <Link href="/#projects" onClick={() => setIsOpen(!isOpen)} className="block font-extralight py-2 hover:text-gray-400">Projects</Link>
               </motion.div>
             </motion.div>
           </motion.div>
