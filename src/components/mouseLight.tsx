@@ -8,21 +8,31 @@ const MouseLight = (() => {
   const { camera } = useThree();
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     const handleMouseMove = (event: MouseEvent) => {
       const x = (event.clientX / window.innerWidth) * 2 - 1;
       const y = -(event.clientY / window.innerHeight) * 2 + 1;
-      setMousePosition({ x, y });
+
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setMousePosition({ x, y });
+      }, 8); // Update every 50ms
     };
   
     const handleTouchMove = (event: TouchEvent) => {
       const touch = event.touches[0];
       const x = (touch.clientX / window.innerWidth) * 2 - 1;
       const y = -(touch.clientY / window.innerHeight) * 2 + 1;
-      setMousePosition({ x, y });
+
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setMousePosition({ x, y });
+      }, 8); // Update every 50ms
     };
   
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
   
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
