@@ -15,6 +15,7 @@ const Background = () => {
   const [textColor, setTextColor] = useState(255);
   // const [backgroundColor, setBackgroundColor] = useState('rgb(30,58,138)');
   const [isIndex, setIsIndex] = useState(true);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const planeRef = useRef<THREE.Mesh>(null);
 
@@ -53,13 +54,27 @@ const Background = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [pathname, colorMap]);
+  
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      const x = (event.clientX / window.innerWidth) * 2 - 1;
+      const y = -(event.clientY / window.innerHeight) * 2 + 1;
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   return (
     <div id="home" className='flex items-center justify-center'>
-      <div className='fixed top-0 left-0 w-full h-full'>
+      <div className='fixed top-0 left-0 w-full h-full pointer-events-none'>
         <Canvas>
           <ambientLight intensity={0.25} />
-          <MouseLight />
+          <MouseLight mousePosition={mousePosition} />
           <mesh ref={planeRef}>
             <planeGeometry args={[100, 100]} />
             <meshStandardMaterial color="gray" roughness={0.4} metalness={0.1} />
