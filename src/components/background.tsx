@@ -3,30 +3,31 @@
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from "next/link";
-import interpolate from 'color-interpolate';
 
 // Three.js
-import { Canvas, useLoader  } from '@react-three/fiber';
+import { Canvas, useLoader} from '@react-three/fiber';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as THREE from 'three';
 import MouseLight from '@/components/mouseLight';
 
 const BGModel = () => {
+  const planeRef = useRef<THREE.Mesh>(null);
+
   const gltf = useLoader(GLTFLoader, '/models/background.glb');
-  return <primitive object={gltf.scene} />
+  return (
+    <mesh ref={planeRef} scale={[5, 5, 5]} rotation={[Math.PI / 2, 0, 0]}>
+      <primitive object={gltf.scene} />
+    </mesh>
+  );
 }
 
 const Background = () => {
   const [blurIntensity, setBlurIntensity] = useState(0);
   const [textColor, setTextColor] = useState(255);
-  // const [backgroundColor, setBackgroundColor] = useState('rgb(30,58,138)');
+
   const [isIndex, setIsIndex] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
-  const planeRef = useRef<THREE.Mesh>(null);
-
-  // Color configuration
-  const colorMap = interpolate(['rgb(30,58,138)', 'rgb(34,78,62)', 'rgb(48,59,6)', 'rgb(96,10,62)']);
   const maxBlur = 8;
   const scrollThreshold = 400;
 
@@ -39,7 +40,6 @@ const Background = () => {
     setIsMobile(window.innerWidth <= 768);
 
     if (!isHomePage) {
-      // setBackgroundColor('rgb(30,58,138)');
       setTextColor(128);
       setBlurIntensity(8);
       return;
@@ -48,20 +48,16 @@ const Background = () => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
 
-      // Calculate blur and text color
       const calculatedBlur = Math.min((scrollY / scrollThreshold) * maxBlur, maxBlur);
       const calculatedTextColor = Math.max((scrollThreshold / scrollY) * 255, 128);
-      // const bgColorRatio = Math.min(scrollY / (scrollThreshold * 9), 1);
 
-      // Update background color
-      // setBackgroundColor(colorMap(bgColorRatio));
       setTextColor(calculatedTextColor);
       setBlurIntensity(calculatedBlur);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname, colorMap]);
+  }, [pathname]);
 
   return (
     <div id="home" className='flex items-center justify-center'>
@@ -80,22 +76,9 @@ const Background = () => {
           <Canvas dpr={isMobile ? [1, 1.5] : [1, 2]}>
             <ambientLight intensity={0.25} />
             <MouseLight isMobile={isMobile} />
-
-            <mesh ref={planeRef} scale={[5, 5, 5]} rotation={[Math.PI/2, 0, 0]}>
-              {/* <planeGeometry args={[100, 100]} /> */}
-              <BGModel />
-              {/* <meshStandardMaterial color="white" roughness={0.75} metalness={0.0} /> */}
-            </mesh>
+            <BGModel />
           </Canvas>
         </div>
-
-        {/* <div
-          className='absolute inset-0 z-[-10] rounded-full bg-gradient-radial from-white blur-3xl'
-          style={{
-            '--tw-gradient-from': backgroundColor,
-            '--tw-gradient-to': 'transparent'
-          }}
-        /> */}
 
         <h1
           className="text-4xl font-bold text-center sm:text-5xl md:text-6xl"
