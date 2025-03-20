@@ -6,9 +6,15 @@ import Link from "next/link";
 import interpolate from 'color-interpolate';
 
 // Three.js
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useLoader  } from '@react-three/fiber';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as THREE from 'three';
 import MouseLight from '@/components/mouseLight';
+
+const BGModel = () => {
+  const gltf = useLoader(GLTFLoader, '/models/background.glb');
+  return <primitive object={gltf.scene} />
+}
 
 const Background = () => {
   const [blurIntensity, setBlurIntensity] = useState(0);
@@ -59,17 +65,6 @@ const Background = () => {
 
   return (
     <div id="home" className='flex items-center justify-center'>
-      <div className='fixed top-0 left-0 w-full h-full pointer-events-none'>
-        <Canvas  dpr={isMobile ? [1, 1.5] : [1, 2]}>
-          <ambientLight intensity={0.25} />
-          <MouseLight isMobile={isMobile} />
-          <mesh ref={planeRef}>
-            <planeGeometry args={[100, 100]} />
-            <meshStandardMaterial color="gray" roughness={0.4} metalness={0.1} />
-          </mesh>
-        </Canvas>
-      </div>
-
       <div
         className="
           fixed top-0 left-0 flex items-center justify-center w-full h-screen
@@ -81,6 +76,19 @@ const Background = () => {
           pointerEvents: 'none'
         }}
       >
+        <div className='fixed top-0 left-0 w-full h-full pointer-events-none z-[-1]'>
+          <Canvas dpr={isMobile ? [1, 1.5] : [1, 2]}>
+            <ambientLight intensity={0.25} />
+            <MouseLight isMobile={isMobile} />
+
+            <mesh ref={planeRef} scale={[5, 5, 5]} rotation={[Math.PI/2, 0, 0]}>
+              {/* <planeGeometry args={[100, 100]} /> */}
+              <BGModel />
+              {/* <meshStandardMaterial color="white" roughness={0.75} metalness={0.0} /> */}
+            </mesh>
+          </Canvas>
+        </div>
+
         {/* <div
           className='absolute inset-0 z-[-10] rounded-full bg-gradient-radial from-white blur-3xl'
           style={{
@@ -88,6 +96,7 @@ const Background = () => {
             '--tw-gradient-to': 'transparent'
           }}
         /> */}
+
         <h1
           className="text-4xl font-bold text-center sm:text-5xl md:text-6xl"
           style={{
