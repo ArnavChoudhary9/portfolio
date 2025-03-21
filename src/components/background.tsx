@@ -5,19 +5,28 @@ import { usePathname } from 'next/navigation';
 import Link from "next/link";
 
 // Three.js
-import { Canvas, useLoader} from '@react-three/fiber';
+import { Canvas, useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as THREE from 'three';
 import MouseLight from '@/components/mouseLight';
 
 const BGModel = () => {
   const planeRef = useRef<THREE.Mesh>(null);
+  const nameRef = useRef<THREE.Mesh>(null);
 
-  const gltf = useLoader(GLTFLoader, '/models/background.glb');
+  const plane = useLoader(GLTFLoader, '/models/background.glb');
+  const name = useLoader(GLTFLoader, '/models/name.glb');
+
   return (
-    <mesh ref={planeRef} scale={[5, 5, 5]} rotation={[Math.PI / 2, 0, 0]}>
-      <primitive object={gltf.scene} />
-    </mesh>
+    <>
+      <mesh receiveShadow ref={planeRef} scale={[5, 5, 5]} rotation={[Math.PI / 2, 0, 0]}>
+        <primitive object={plane.scene} />
+      </mesh>
+
+      <mesh castShadow ref={nameRef} scale={[5, 5, 5]} rotation={[Math.PI / 2, 0, 0]}>
+        <primitive object={name.scene} />
+      </mesh>
+    </>
   );
 }
 
@@ -28,8 +37,8 @@ const Background = () => {
   const [isIndex, setIsIndex] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
-  const maxBlur = 8;
-  const scrollThreshold = 400;
+  const maxBlur = 12;
+  const scrollThreshold = 600;
 
   const pathname = usePathname();
 
@@ -73,21 +82,21 @@ const Background = () => {
         }}
       >
         <div className='fixed top-0 left-0 w-full h-full pointer-events-none z-[-1]'>
-          <Canvas dpr={isMobile ? [1, 1.5] : [1, 2]}>
+          <Canvas shadows dpr={isMobile ? [1, 1.5] : [1, 2]}>
             <ambientLight intensity={0.25} />
             <MouseLight isMobile={isMobile} />
             <BGModel />
           </Canvas>
         </div>
 
-        <h1
+        {/* <h1
           className="text-4xl font-bold text-center sm:text-5xl md:text-6xl"
           style={{
             color: `rgb(${textColor},${textColor},${textColor})`
           }}
         >
           Arnav Choudhary
-        </h1>
+        </h1> */}
       </div>
 
       {isIndex &&
