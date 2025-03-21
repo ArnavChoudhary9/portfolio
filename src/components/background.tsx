@@ -32,7 +32,6 @@ const BGModel = () => {
 
 const Background = () => {
   const [blurIntensity, setBlurIntensity] = useState(0);
-  const [textColor, setTextColor] = useState(255);
 
   const [isIndex, setIsIndex] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -49,8 +48,7 @@ const Background = () => {
     setIsMobile(window.innerWidth <= 768);
 
     if (!isHomePage) {
-      setTextColor(128);
-      setBlurIntensity(8);
+      setBlurIntensity(maxBlur);
       return;
     }
 
@@ -58,9 +56,7 @@ const Background = () => {
       const scrollY = window.scrollY;
 
       const calculatedBlur = Math.min((scrollY / scrollThreshold) * maxBlur, maxBlur);
-      const calculatedTextColor = Math.max((scrollThreshold / scrollY) * 255, 128);
 
-      setTextColor(calculatedTextColor);
       setBlurIntensity(calculatedBlur);
     };
 
@@ -88,15 +84,6 @@ const Background = () => {
             <BGModel />
           </Canvas>
         </div>
-
-        {/* <h1
-          className="text-4xl font-bold text-center sm:text-5xl md:text-6xl"
-          style={{
-            color: `rgb(${textColor},${textColor},${textColor})`
-          }}
-        >
-          Arnav Choudhary
-        </h1> */}
       </div>
 
       {isIndex &&
