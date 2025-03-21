@@ -6,6 +6,7 @@ import Link from "next/link";
 
 // Three.js
 import { Canvas, useLoader } from '@react-three/fiber';
+import { Text3D } from '@react-three/drei';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as THREE from 'three';
 import MouseLight from '@/components/mouseLight';
@@ -14,8 +15,13 @@ const BGModel = () => {
   const planeRef = useRef<THREE.Mesh>(null);
   const nameRef = useRef<THREE.Mesh>(null);
 
+  useEffect(() => {
+    if (nameRef.current) {
+      nameRef.current.geometry.center(); // Centers the geometry
+    }
+  }, []);
+
   const plane = useLoader(GLTFLoader, '/models/background.glb');
-  const name = useLoader(GLTFLoader, '/models/name.glb');
 
   return (
     <>
@@ -23,9 +29,10 @@ const BGModel = () => {
         <primitive object={plane.scene} />
       </mesh>
 
-      <mesh castShadow ref={nameRef} scale={[5, 5, 5]} rotation={[Math.PI / 2, 0, 0]}>
-        <primitive object={name.scene} />
-      </mesh>
+      <Text3D ref={nameRef} castShadow size={0.5} height={0.2} position={[0, 0, -0.65]} font='/fonts/Roboto_Regular.json'>
+        Arnav Choudhary
+        <meshStandardMaterial color='white' metalness={0} />
+      </Text3D>
     </>
   );
 }
@@ -78,8 +85,8 @@ const Background = () => {
         }}
       >
         <div className='fixed top-0 left-0 w-full h-full pointer-events-none z-[-1]'>
-          <Canvas shadows dpr={isMobile ? [1, 1.5] : [1, 2]}>
-            <ambientLight intensity={0.25} />
+          <Canvas shadows dpr={isMobile ? [1, 1.5] : [1, 2]} camera={{ position:[0,0,7], fov: 60 }}>
+            <ambientLight intensity={0.1} />
             <MouseLight isMobile={isMobile} />
             <BGModel />
           </Canvas>

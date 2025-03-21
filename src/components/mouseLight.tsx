@@ -40,16 +40,15 @@ const MouseLight = (({ isMobile } : {
       vector.unproject(camera);
 
       const dir = vector.sub(camera.position).normalize();
-      const distance = 5;
+      const distance = 7;
       const pos = camera.position.clone().add(dir.multiplyScalar(distance));
-      // const pos = vector.multiplyScalar(2);
 
       lightRef.current.position.lerp(pos, isMobile ? 0.05 : 0.3);
     }
   });
 
   return (
-    <pointLight castShadow ref={lightRef} intensity={1.5} distance={10} color={0xffffff} />
+    <pointLight castShadow ref={lightRef} intensity={2.5} distance={2.5} color={0xffffff} />
   );
 });
 
