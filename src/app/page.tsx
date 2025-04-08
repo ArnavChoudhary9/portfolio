@@ -1,103 +1,81 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useRef, useEffect, useState } from 'react';
+
+const Home = () => {
+  const sliderContainerRef = useRef<HTMLDivElement | null>(null);
+  const slideRightRef = useRef<HTMLDivElement | null>(null);
+  const slideLeftRef = useRef<HTMLDivElement | null>(null);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
+  const slidesLength = 4; // Number of slides
+
+  useEffect(() => {
+    if (slideLeftRef.current) {
+      slideLeftRef.current.style.top = `-${(slidesLength - 1) * 100}vh`;
+    }
+  }, []);
+
+  const changeSlide = (direction: 'up' | 'down') => {
+    const sliderHeight = sliderContainerRef.current?.clientHeight || 0;
+    let newIndex = activeSlideIndex;
+
+    if (direction === 'up') {
+      newIndex = activeSlideIndex + 1;
+      if (newIndex > slidesLength - 1) {
+        newIndex = 0;
+      }
+    } else if (direction === 'down') {
+      newIndex = activeSlideIndex - 1;
+      if (newIndex < 0) {
+        newIndex = slidesLength - 1;
+      }
+    }
+
+    setActiveSlideIndex(newIndex);
+
+    if (slideRightRef.current && slideLeftRef.current) {
+      slideRightRef.current.style.transform = `translateY(-${newIndex * sliderHeight}px)`;
+      slideLeftRef.current.style.transform = `translateY(${newIndex * sliderHeight}px)`;
+    }
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="slider-container" ref={sliderContainerRef}>
+      <div className="left-slide" ref={slideLeftRef}>
+        <div style={{ backgroundColor: "#FD3555" }}>
+          <h1>Nature flower</h1>
+          <p>all in pink</p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div style={{ backgroundColor: "#2A86BA" }}>
+          <h1>Bluuue Sky</h1>
+          <p>with it's mountains</p>
+        </div>
+        <div style={{ backgroundColor: "#252E33" }}>
+          <h1>Lonely castle</h1>
+          <p>in the wilderness</p>
+        </div>
+        <div style={{ backgroundColor: "#FFB866" }}>
+          <h1>Flying eagle</h1>
+          <p>in the sunset</p>
+        </div>
+      </div>
+      <div className="right-slide" ref={slideRightRef}>
+        <div style={{ backgroundImage: "url('https://images.unsplash.com/photo-1508768787810-6adc1f613514?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e27f6661df21ed17ab5355b28af8df4e&auto=format&fit=crop&w=1350&q=80')" }}></div>
+        <div style={{ backgroundImage: "url('https://images.unsplash.com/photo-1519981593452-666cf05569a9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=90ed8055f06493290dad8da9584a13f7&auto=format&fit=crop&w=715&q=80')" }}></div>
+        <div style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486899430790-61dbf6f6d98b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8ecdee5d1b3ed78ff16053b0227874a2&auto=format&fit=crop&w=1002&q=80')" }}></div>
+        <div style={{ backgroundImage: "url('https://images.unsplash.com/photo-1510942201312-84e7962f6dbb?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=da4ca7a78004349f1b63f257e50e4360&auto=format&fit=crop&w=1050&q=80')" }}></div>
+      </div>
+      <div className="action-buttons">
+        <button className="down-button" onClick={() => changeSlide('down')}>
+          <i className="fa fa-arrow-down"></i>
+        </button>
+        <button className="up-button" onClick={() => changeSlide('up')}>
+          <i className="fa fa-arrow-up"></i>
+        </button>
+      </div>
     </div>
   );
-}
+};
+
+export default Home;
