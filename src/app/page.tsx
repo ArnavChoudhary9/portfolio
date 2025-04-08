@@ -49,7 +49,7 @@ const Home = () => {
         </div>
         <div style={{ backgroundColor: "#2A86BA" }}>
           <h1>Bluuue Sky</h1>
-          <p>with it's mountains</p>
+          <p>with it&aposs mountains</p>
         </div>
         <div style={{ backgroundColor: "#252E33" }}>
           <h1>Lonely castle</h1>
