@@ -1,65 +1,69 @@
-import Link from 'next/link';
-import { FaGithub, FaLinkedin, FaInstagram, FaYoutube } from 'react-icons/fa';
+import Link from "next/link";
+import { FaGithub, FaLinkedin, FaInstagram, FaYoutube } from "react-icons/fa";
 
-export default function Footer() {
-  return (
-    <footer className="bottom-0 bg-dark-900 z-[20] text-white py-8 mt-16">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between">
-          {/* Social Media Icons */}
-          <div className="flex space-x-6 mb-4 md:mb-0">
-            <Link 
-              href="https://github.com/ArnavChoudhary9/"
-              className="hover:text-blue-400 transition-colors duration-300"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-            >
-              <FaGithub className="h-6 w-6 hover:scale-125 transition-transform" />
-            </Link>
+const stack = ["VULKAN_SDK", "RUST_STABLE", "C++20", "NEXT.JS"];
 
-            <Link
-              href="https://linkedin.com/in/arnav-choudhary-017892322"
-              className="hover:text-[#0A66C2] transition-colors duration-300"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin className="h-6 w-6 hover:scale-125 transition-transform" />
-            </Link>
+const socials = [
+  {
+    href: "https://github.com/ArnavChoudhary9/",
+    label: "GitHub",
+    Icon: FaGithub,
+    color: "hover:text-primary",
+  },
+  {
+    href: "https://linkedin.com/in/arnav-choudhary-017892322",
+    label: "LinkedIn",
+    Icon: FaLinkedin,
+    color: "hover:text-primary",
+  },
+  {
+    href: "https://www.instagram.com/arnavchoudhary.69",
+    label: "Instagram",
+    Icon: FaInstagram,
+    color: "hover:text-tertiary",
+  },
+  {
+    href: "https://www.youtube.com/@photon1310",
+    label: "YouTube",
+    Icon: FaYoutube,
+    color: "hover:text-error",
+  },
+];
 
-            <Link
-              href="https://www.instagram.com/arnavchoudhary.69"
-              className="hover:text-[#E4405F] transition-colors duration-300"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
-              <FaInstagram className="h-6 w-6 hover:scale-125 transition-transform" />
-            </Link>
+const Footer = () => (
+  <footer className="w-full px-margin-mobile md:px-margin-desktop py-6 mt-16 flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-lowest border-t border-white/5">
+    <div className="flex items-center gap-4">
+      <span className="font-mono text-[11px] text-secondary">
+        © {new Date().getFullYear()} ENGINE_CORE // STABLE_BUILD
+      </span>
+    </div>
 
-            <Link
-              href="https://www.youtube.com/@photon1310"
-              className="hover:text-[#FF0000] transition-colors duration-300"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-            >
-              <FaYoutube className="h-6 w-6 hover:scale-125 transition-transform" />
-            </Link>
-          </div>
+    <div className="flex items-center gap-4">
+      {socials.map(({ href, label, Icon, color }) => (
+        <Link
+          key={label}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+          className={`text-on-surface-variant ${color} transition-colors`}
+        >
+          <Icon className="h-4 w-4" />
+        </Link>
+      ))}
+    </div>
 
-          {/* Copyright Text */}
-          <div className="text-center md:text-right">
-            <p className="text-sm text-gray-400">
-              © {new Date().getFullYear()} Arnav Choudhary. All rights reserved.
-            </p>
-            <p className="text-xs text-gray-500 mt-1">
-              Built with Next.js and Tailwind CSS
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
+    <div className="flex flex-wrap justify-center gap-4">
+      {stack.map((s) => (
+        <span
+          key={s}
+          className="font-mono text-[11px] text-on-surface-variant hover:text-secondary transition-colors"
+        >
+          {s}
+        </span>
+      ))}
+    </div>
+  </footer>
+);
+
+export default Footer;

@@ -1,40 +1,185 @@
+@import "highlight.js/styles/github-dark.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Hide the raw ligature text (e.g. "keyboard_arrow_down") until the icon font finishes loading. */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+.material-symbols-outlined:not(:lang(none)) {
+  font-size-adjust: from-font;
+}
+
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
+  color-scheme: dark;
 }
 
 html {
   scroll-behavior: smooth;
-}
-:target {
-  scroll-margin-top: 20; /* Adjust based on header height */
+  background-color: #131313;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+:target {
+  scroll-margin-top: 80px;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #131313;
+  color: #e5e2e1;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-attachment: fixed;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* ------- engine-core utilities ------- */
+@layer components {
+  .glass-card {
+    @apply rounded-lg border border-white/[0.08] bg-[rgba(30,30,30,0.7)] backdrop-blur-md transition-all duration-150 ease-in-out-expo;
+  }
+
+  .glow-border:hover {
+    border-color: rgba(173, 198, 255, 0.8);
+    box-shadow: 0 0 15px rgba(173, 198, 255, 0.2);
+  }
+
+  .glow-border-strong:hover {
+    border-color: #adc6ff;
+    box-shadow: 0 0 15px rgba(173, 198, 255, 0.2),
+      inset 0 0 10px rgba(173, 198, 255, 0.1);
+  }
+
+  .btn-primary {
+    @apply font-mono uppercase tracking-widest text-[11px] font-medium px-6 py-3 rounded inline-flex items-center gap-2 transition-all duration-150 ease-in-out-expo border;
+    background-color: #adc6ff;
+    color: #001a42;
+    border-color: #adc6ff;
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 15px rgba(173, 198, 255, 0.4);
+  }
+
+  .btn-ghost {
+    @apply font-mono uppercase tracking-widest text-[11px] font-medium px-6 py-3 rounded inline-flex items-center gap-2 transition-all duration-150 ease-in-out-expo border border-white/10 text-on-surface-variant hover:text-primary hover:border-primary/60;
+  }
+
+  .tech-tag {
+    @apply font-mono text-[11px] font-medium px-2 py-1 rounded border border-white/10 bg-black/20 text-on-surface-variant;
+  }
+
+  .status-pill {
+    @apply font-mono text-[11px] font-medium px-2 py-1 rounded inline-flex items-center gap-1.5 border;
+  }
+  .status-pill .dot {
+    @apply w-1.5 h-1.5 rounded-full;
+  }
+
+  .status-stable {
+    @apply text-secondary border-secondary/30 bg-secondary/10;
+  }
+  .status-stable .dot { @apply bg-secondary; }
+
+  .status-beta {
+    @apply text-tertiary border-tertiary/30 bg-tertiary/10;
+  }
+  .status-beta .dot { @apply bg-tertiary; }
+
+  .status-compiling {
+    @apply text-primary border-primary/30 bg-primary/10;
+  }
+  .status-compiling .dot { @apply bg-primary; }
+
+  .skeleton {
+    @apply rounded bg-surface-container-high relative overflow-hidden;
+  }
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(173, 198, 255, 0.06) 40%,
+      rgba(173, 198, 255, 0.10) 50%,
+      rgba(173, 198, 255, 0.06) 60%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: shimmer 1.6s linear infinite;
+  }
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton::after { animation: none; }
   }
 }
+
+/* ------- prose / markdown ------- */
+.prose-engine {
+  @apply text-on-surface;
+}
+.prose-engine h1,
+.prose-engine h2,
+.prose-engine h3,
+.prose-engine h4 {
+  @apply font-sans font-semibold text-on-surface tracking-tight;
+}
+.prose-engine h1 { @apply text-3xl mt-10 mb-4 pb-2 border-b border-outline-variant/30; }
+.prose-engine h2 { @apply text-2xl mt-8 mb-3 pb-2 border-b border-outline-variant/30; }
+.prose-engine h3 { @apply text-xl mt-6 mb-2; }
+.prose-engine h4 { @apply text-lg mt-4 mb-2; }
+.prose-engine p { @apply text-on-surface-variant leading-relaxed my-4; }
+.prose-engine a { @apply text-primary underline-offset-4 hover:underline; }
+.prose-engine ul { @apply list-disc list-outside pl-6 my-4 space-y-1 text-on-surface-variant; }
+.prose-engine ol { @apply list-decimal list-outside pl-6 my-4 space-y-1 text-on-surface-variant; }
+.prose-engine blockquote {
+  @apply border-l-2 border-primary/60 pl-4 my-4 text-on-surface-variant italic;
+}
+.prose-engine code {
+  @apply font-mono text-[13px] px-1.5 py-0.5 rounded bg-surface-container-high text-primary border border-white/5;
+}
+.prose-engine pre {
+  @apply font-mono text-[13px] my-4 p-4 rounded-lg bg-surface-container-lowest border border-white/10 overflow-x-auto;
+}
+.prose-engine pre code {
+  @apply bg-transparent border-0 p-0 text-on-surface;
+}
+.prose-engine img {
+  @apply rounded-lg border border-white/10 my-6 max-w-full h-auto mx-auto;
+}
+.prose-engine table {
+  @apply w-full border-collapse my-6 text-sm;
+}
+.prose-engine th, .prose-engine td {
+  @apply border border-outline-variant/40 px-3 py-2 text-left;
+}
+.prose-engine th {
+  @apply bg-surface-container-high text-on-surface font-mono text-xs uppercase tracking-wider;
+}
+.prose-engine hr {
+  @apply my-8 border-outline-variant/30;
+}
+.prose-engine input[type="checkbox"] {
+  @apply mr-2 accent-primary;
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+::-webkit-scrollbar-thumb { background: #424754; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #8c909f; }

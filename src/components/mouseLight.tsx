@@ -1,55 +1,59 @@
-import { useRef, useEffect } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
-import * as THREE from 'three';
+import { useRef, useEffect } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import * as THREE from "three";
 
-const MouseLight = (({ isMobile } : {
-  isMobile: boolean
+const MouseLight = ({
+  isMobile,
+  disabled = false,
+}: {
+  isMobile: boolean;
+  disabled?: boolean;
 }) => {
   const mousePosition = useRef({ x: 0, y: 0 });
   const lightRef = useRef<THREE.PointLight>(null);
   const { camera } = useThree();
 
   useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      mousePosition.current.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mousePosition.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    if (disabled) return;
+    const onMouse = (e: MouseEvent) => {
+      mousePosition.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mousePosition.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    };
+    const onTouch = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (!t) return;
+      mousePosition.current.x = (t.clientX / window.innerWidth) * 2 - 1;
+      mousePosition.current.y = -(t.clientY / window.innerHeight) * 2 + 1;
     };
 
-    const handleTouchMove = (event: TouchEvent) => {
-      const touch = event.touches[0];
-      mousePosition.current.x = (touch.clientX / window.innerWidth) * 2 - 1;
-      mousePosition.current.y = -(touch.clientY / window.innerHeight) * 2 + 1;
-    };
-
-    if(!isMobile)
-      window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    else
-      window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    if (!isMobile) window.addEventListener("mousemove", onMouse, { passive: true });
+    else window.addEventListener("touchmove", onTouch, { passive: true });
 
     return () => {
-      if(!isMobile)
-        window.removeEventListener('mousemove', handleMouseMove);
-      else
-        window.removeEventListener('touchmove', handleTouchMove);
+      if (!isMobile) window.removeEventListener("mousemove", onMouse);
+      else window.removeEventListener("touchmove", onTouch);
     };
-  }, [isMobile]);
+  }, [isMobile, disabled]);
 
   useFrame(() => {
-    if (lightRef.current) {
-      const vector = new THREE.Vector3(mousePosition.current.x, mousePosition.current.y, 0.5);
-      vector.unproject(camera);
-
-      const dir = vector.sub(camera.position).normalize();
-      const distance = 7;
-      const pos = camera.position.clone().add(dir.multiplyScalar(distance));
-
-      lightRef.current.position.lerp(pos, isMobile ? 0.05 : 0.3);
-    }
+    if (disabled || !lightRef.current) return;
+    const v = new THREE.Vector3(mousePosition.current.x, mousePosition.current.y, 0.5);
+    v.unproject(camera);
+    const dir = v.sub(camera.position).normalize();
+    const distance = 7;
+    const pos = camera.position.clone().add(dir.multiplyScalar(distance));
+    lightRef.current.position.lerp(pos, isMobile ? 0.05 : 0.3);
   });
 
   return (
-    <pointLight castShadow ref={lightRef} intensity={2.5} distance={2.5} color={0xffffff} />
+    <pointLight
+      castShadow
+      ref={lightRef}
+      intensity={disabled ? 0 : 2.5}
+      distance={2.5}
+      color={0xadc6ff}
+    />
   );
-});
+};
 
 export default MouseLight;

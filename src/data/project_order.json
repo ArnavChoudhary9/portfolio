@@ -1,0 +1,36 @@
+{
+  "featured": ["Photon", "RayTracing", "pi"],
+  "hidden": ["ArnavChoudhary9", "portfolio"],
+  "overrides": {
+    "Photon": {
+      "title": "Photon Engine",
+      "status": "BETA",
+      "banner": "/images/projects/photon.png"
+    },
+    "pi": {
+      "title": "Pi",
+      "status": "STABLE",
+      "banner": "/images/projects/pi.png"
+    },
+    "RayTracing": {
+      "title": "Rust Raytracer",
+      "status": "COMPILING",
+      "banner": "/images/projects/rust-raytracer.jpg"
+    },
+    "PhysicsEngine": {
+      "title": "Physics Engine",
+      "status": "STABLE",
+      "banner": "/images/projects/physics-engine.jpeg"
+    },
+    "PyRender": {
+      "title": "PyRender",
+      "status": "STABLE",
+      "banner": "/images/projects/pyrender.jpeg"
+    },
+    "kahnav-properties": {
+      "title": "Kahnav Properties",
+      "status": "STABLE",
+      "banner": "/images/projects/kahnav-properties.png"
+    }
+  }
+}
